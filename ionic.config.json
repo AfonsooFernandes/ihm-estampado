@@ -1,0 +1,7 @@
+{
+  "name": "Estampado-TP-IHM",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

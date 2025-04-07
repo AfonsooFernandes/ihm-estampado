@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/finalizar-compra"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Método de Pagamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="progress-bar">
+    <div class="step completed">
+      <div class="circle">1</div>
+      <div class="label">Método de Entrega</div>
+    </div>
+    <div class="step completed">
+      <div class="circle">2</div>
+      <div class="label">Morada</div>
+    </div>
+    <div class="step completed">
+      <div class="circle">3</div>
+      <div class="label">Pagamento</div>
+    </div>
+    <div class="step">
+      <div class="circle">4</div>
+      <div class="label">Confirmação</div>
+    </div>
+  </div>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="metodoPagamento" (ionChange)="updateMetodoPagamento(metodoPagamento)">
+      <ion-item>
+        <ion-label>Cartão de Crédito</ion-label>
+        <ion-radio slot="start" value="Cartão de Crédito"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>PayPal</ion-label>
+        <ion-radio slot="start" value="PayPal"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>MBWay</ion-label>
+        <ion-radio slot="start" value="MBWay"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Referência Multibanco</ion-label>
+        <ion-radio slot="start" value="Referência Multibanco"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  
+  <ion-item>
+    <ion-label position="floating">Código de Desconto</ion-label>
+    <ion-input [(ngModel)]="codigoDesconto"></ion-input>
+  </ion-item>
+  <div class="ion-padding-top">
+    <ion-button expand="block" (click)="aplicarDesconto()">Aplicar</ion-button>
+  </div>
+
+  <div *ngIf="mensagemDesconto" class="ion-padding-top">
+    <ion-text [color]="descontoAplicado ? 'success' : 'danger'">
+      {{ mensagemDesconto }}
+    </ion-text>
+  </div>
+
+  <div class="ion-padding-top">
+    <ion-button [routerLink]="['/confirmacao']" [state]="{ userId: userId, compraId: compraId }" expand="block" fill="outline">
+      Finalizar Compra
+    </ion-button>
+  </div>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="toolbar-background" style="background: white;">
+    <ion-tab-bar color="clear" style="width: 100%;">
+
+      <ion-tab-button tab="tab-carrinho" [routerLink]="['/carrinho']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="cart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Carrinho</ion-label>
+      </ion-tab-button>           
+
+      <ion-tab-button tab="tab-home" routerLink="/home" style="width: 20%;">
+        <ion-icon name="home" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Página Inicial</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="tab-favoritos" [routerLink]="['/favoritos']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="heart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Favoritos</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>

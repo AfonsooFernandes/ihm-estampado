@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="/carrinho"> </ion-back-button>
+    </ion-buttons>
+    <ion-title>Selecionar método de entrega</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="progress-bar">
+    <div class="step completed">
+      <div class="circle">1</div>
+      <div class="label">Método de Entrega</div>
+    </div>
+    <div class="step">
+      <div class="circle">2</div>
+      <div class="label">Morada</div>
+    </div>
+    <div class="step">
+      <div class="circle">3</div>
+      <div class="label">Pagamento</div>
+    </div>
+    <div class="step">
+      <div class="circle">4</div>
+      <div class="label">Confirmação</div>
+    </div>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selecionar método de entrega</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-radio-group [(ngModel)]="deliveryOption">
+        <ion-item>
+          <ion-label>Enviar para loja</ion-label>
+          <ion-radio slot="start" value="loja"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Enviar para domicílio</ion-label>
+          <ion-radio slot="start" value="domicilio"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <ion-button [routerLink]="['/finalizar-compra']"  [state]="{ userId: userId, compraId: compraId }" fill="outline">
+      Avançar
+    </ion-button>
+  </div>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="toolbar-background" style="background: white;">
+    <ion-tab-bar color="clear" style="width: 100%;">
+
+      <ion-tab-button tab="tab-carrinho" [routerLink]="['/carrinho']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="cart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Carrinho</ion-label>
+      </ion-tab-button>           
+
+      <ion-tab-button tab="tab-home" routerLink="/home" style="width: 20%;">
+        <ion-icon name="home" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Página Inicial</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="tab-favoritos" [routerLink]="['/favoritos']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="heart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Favoritos</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>

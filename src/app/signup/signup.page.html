@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="toolbar-background">
+    <ion-title style="color: black">Estampado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar color="toolbar-background" style="background: white;">
+  <ion-buttons style="color:black" slot="start">
+    <ion-back-button defaultHref="/login"></ion-back-button>
+  </ion-buttons>
+  <ion-title style="color:black">Criar conta</ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <ion-card color="toolbar-background" style="background: transparent; border: 1px solid black;">
+    <ion-card-content>
+      <form (ngSubmit)="signup()" [formGroup]="credentials">
+        <ion-item color="toolbar-background">
+          <ion-label style="color: black" position="stacked">Nome:</ion-label>
+          <ion-input style="color: black; border-bottom: 1px solid black;" type="text" formControlName="nome" placeholder="Seu nome"></ion-input>
+        </ion-item>
+        <ion-item color="toolbar-background">
+          <ion-label style="color: black" position="stacked">Email:</ion-label>
+          <ion-input style="color: black; border-bottom: 1px solid black;" type="email" inputmode="email" formControlName="email" placeholder="email@gmail.com"></ion-input>
+        </ion-item>
+        <ion-item color="toolbar-background">
+          <ion-label style="color: black" position="stacked">Palavra-passe:</ion-label>
+          <ion-input style="color: black; border-bottom: 1px solid black;" type="password" inputmode="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item color="toolbar-background">
+          <ion-label style="color: black" position="stacked">Morada:</ion-label>
+          <ion-input style="color: black; border-bottom: 1px solid black;" type="text" formControlName="morada" placeholder="Sua morada"></ion-input>
+        </ion-item>
+        <ion-button color="toolbar-background" style="color: black" type="submit" expand="block" strong="true" [disabled]="credentials.invalid">Criar Conta</ion-button>
+      </form>
+      <div *ngIf="passwordError" style="color: red; margin-top: 10px; text-align: center;">
+        {{ passwordError }}
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

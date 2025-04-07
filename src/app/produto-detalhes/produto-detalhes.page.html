@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="toolbar-background" style="background: white;">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back" style="color: black;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="color: rgb(0, 0, 0);">Produto Detalhes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="produto">
+  <ion-card *ngIf="produto.id !== 0" style="background-color: white; color: black;">
+    <ion-card-header>
+      <ion-card-title>{{ produto.titulo }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="produto.imagem" style="display: block; margin: 0 auto 16px;"></ion-img>
+      <p>{{ produto.descricao }}</p>
+      <p style="font-size: 1.5em; color: black; font-weight: bold; margin-bottom: 24px;">{{ produto.preco | currency }}</p>
+      
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" style="display: flex; justify-content: center; margin-bottom: 12px;">
+            <ion-button expand="clear" (click)="inserirFoto()" style="margin-right: 16px; border-radius: 25px; background: transparent; border: 1px solid black; color: black;">
+              <ion-icon name="camera" slot="start"></ion-icon>
+              Inserir Foto
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" style="display: flex; justify-content: center; margin-bottom: 12px;">
+            <ion-button expand="clear" (click)="inserirTexto()" style="border-radius: 25px; background: transparent; border: 1px solid black; color: black;">
+              <ion-icon name="text" slot="start"></ion-icon>
+              Inserir Texto
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p *ngIf="textoInserido" style="margin-top: 16px;">Texto Inserido: {{ textoInserido }}</p>
+          </ion-col>
+          <ion-col>
+            <p *ngIf="fotoInserida" style="margin-top: 16px;">Foto Inserida: {{ fotoInserida }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin-top: 12px;">
+          <ion-col size="6" style="display: flex; justify-content: center;">
+            <ion-button expand="clear" (click)="adicionarAoCarrinho(produto.id, produto.preco)" style="margin-right: 16px; border-radius: 25px; background: transparent; border: 1px solid black; color: black;">
+              <ion-icon name="cart" slot="start"></ion-icon>
+              Adicionar ao Carrinho
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" style="display: flex; justify-content: center;">
+            <ion-button expand="clear" (click)="adicionarAosFavoritos(produto.id)" style="border-radius: 25px; background: transparent; border: 1px solid black; color: black;">
+              <ion-icon name="heart" slot="start"></ion-icon>
+              Adicionar aos Favoritos
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <p *ngIf="produto.id === 0">Produto não encontrado.</p>
+</ion-content>
+<p *ngIf="!produto">Carregando...</p>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="toolbar-background" style="background: white;">
+    <ion-tab-bar color="clear" style="width: 100%; background-color: white;">
+
+      <ion-tab-button tab="tab-carrinho" [routerLink]="['/carrinho']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="cart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Carrinho</ion-label>
+      </ion-tab-button>           
+
+      <ion-tab-button tab="tab-home" routerLink="/home" style="width: 20%;">
+        <ion-icon name="home" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Página Inicial</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="tab-favoritos" [routerLink]="['/favoritos']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="heart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Favoritos</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>

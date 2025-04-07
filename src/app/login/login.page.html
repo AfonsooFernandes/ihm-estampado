@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="toolbar-background">
+    <ion-title style="color: black">Estampado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="toolbar-background" style="background: transparent; border: 1px solid black;">
+    <ion-card-content>
+      <form (ngSubmit)="login()" [formGroup]="credentials">
+        <ion-item color="toolbar-background">
+          <ion-label style="color: black" position="stacked">Email:</ion-label>
+          <ion-input style="color: black; border-bottom: 1px solid black;" type="email" inputmode="email" formControlName="email" placeholder="email@gmail.com"></ion-input>
+          <ion-note slot="error" style="color: red;" *ngIf="credentials.get('email')?.invalid && (credentials.get('email')?.dirty || credentials.get('email')?.touched)">
+            <ng-container *ngIf="credentials.get('email')?.errors?.['required']">Insira o seu email</ng-container>
+            <ng-container *ngIf="credentials.get('email')?.errors?.['email']">Insira um email válido</ng-container>
+          </ion-note>
+        </ion-item>
+        <ion-item color="toolbar-background">
+          <ion-label style="color: black" position="stacked">Palavra-passe:</ion-label>
+          <ion-input style="color: black; border-bottom: 1px solid black;" type="password" inputmode="password" formControlName="password"></ion-input>
+          <ion-note slot="error" style="color: red;" *ngIf="credentials.get('password')?.invalid && (credentials.get('password')?.dirty || credentials.get('password')?.touched)">
+            <ng-container *ngIf="credentials.get('password')?.errors?.['required']">Insira a sua password</ng-container>
+          </ion-note>
+        </ion-item>
+        <ion-button color="toolbar-background" style="color: black" type="submit" expand="block" strong="true" [disabled]="credentials.invalid">Iniciar Sessão</ion-button>
+        <ion-note style="color: red;" *ngIf="loginError">Email ou senha incorretos. Tente novamente.</ion-note>
+      </form>
+      <div style="text-align: center; margin-top: 1em;">
+        <a routerLink="/signup" style="text-decoration: underline; color: black; cursor: pointer;">Criar Conta</a>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

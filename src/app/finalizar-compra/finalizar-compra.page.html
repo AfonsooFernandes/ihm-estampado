@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/op-local"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Morada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <style>
+    .title-black {
+      color: black !important;
+    }
+  </style>
+  <div class="progress-bar">
+    <div class="step completed">
+      <div class="circle">1</div>
+      <div class="label">Método de Entrega </div>
+    </div>
+    <div class="step completed">
+      <div class="circle">2</div>
+      <div class="label">Morada</div>
+    </div>
+    <div class="step">
+      <div class="circle">3</div>
+      <div class="label">Pagamento</div>
+    </div>
+    <div class="step">
+      <div class="circle">4</div>
+      <div class="label">Confirmação</div>
+    </div>
+  </div>
+  <ion-text color="black">
+    <h1 class="title-black">Morada de Faturação</h1>
+  </ion-text>
+  <ion-item>
+    <ion-label position="floating">Nome</ion-label>
+    <ion-input [(ngModel)]="nome" (ionInput)="checkForm()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input [(ngModel)]="email" type="email" (ionInput)="checkForm()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Morada</ion-label>
+    <ion-input [(ngModel)]="morada" (ionInput)="checkForm()"></ion-input>
+  </ion-item>
+  <ion-text color="black">
+    <h1 class="title-black">Morada de Entrega</h1>
+  </ion-text>
+  <ion-item>
+    <ion-label position="floating">Rua</ion-label>
+    <ion-input [(ngModel)]="rua" (ionInput)="checkForm()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Cidade</ion-label>
+    <ion-input [(ngModel)]="cidade" (ionInput)="checkForm()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Distrito</ion-label>
+    <ion-input [(ngModel)]="distrito" (ionInput)="checkForm()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Código-Postal</ion-label>
+    <ion-input [(ngModel)]="codigoPostal" (ionInput)="formatCodigoPostal()"></ion-input>
+  </ion-item>
+
+  <ion-button [routerLink]="['/metodo-pagamento']" [state]="{ userId: userId, compraId: compraId }" expand="block" style="margin-top: 20px; color: black;" fill="outline" [disabled]="!isFormValid">Avançar</ion-button>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="toolbar-background" style="background: white;">
+    <ion-tab-bar color="clear" style="width: 100%;">
+
+      <ion-tab-button tab="tab-carrinho" [routerLink]="['/carrinho']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="cart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Carrinho</ion-label>
+      </ion-tab-button>           
+
+      <ion-tab-button tab="tab-home" routerLink="/home" style="width: 20%;">
+        <ion-icon name="home" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Página Inicial</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="tab-favoritos" [routerLink]="['/favoritos']" [state]="{ userId: userId }" style="width: 20%;">
+        <ion-icon name="heart" style="color: black;"></ion-icon>
+        <ion-label style="color: black; font-size: 9px;">Favoritos</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>
